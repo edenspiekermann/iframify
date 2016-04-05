@@ -97,6 +97,22 @@
   }
 
   /**
+   * Get document height (stackoverflow.com/questions/1145850/)
+   * @param  {Document} doc
+   * @return {Number}
+   */
+  function getDocumentHeight (doc) {
+    doc = doc || document;
+    var body = doc.body;
+    var html = doc.documentElement;
+
+    return Math.max(
+      body.scrollHeight, body.offsetHeight,
+      html.clientHeight, html.scrollHeight, html.offsetHeight
+    );
+  }
+
+  /**
    * Transform a collection of nodes into an iframe version of themselves
    * including all the styles they need to perform correctly.
    * 
@@ -114,14 +130,12 @@
     // dynamically resize iframe height. The setTimeout is there to make sure
     // that any asynchronously loaded content inside the component has been
     // safely loaded before computing the height.
-    ('srcdoc' in iframe) && setTimeout(function () {
-      var html = iframe.contentWindow.document.documentElement;
-      var body = iframe.contentWindow.document.body;
-      iframe.height = Math.max(
-        body.scrollHeight, body.offsetHeight,
-        html.clientHeight, html.scrollHeight, html.offsetHeight
-      ) + 'px';
-    }, 500);
+    if ('srcdoc' in iframe) {
+      setTimeout(function () {
+        var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
+        iframe.height = getDocumentHeight(iframeDocument);
+      }, 500);
+    }
   }
 
   global.iframify = iframify;
