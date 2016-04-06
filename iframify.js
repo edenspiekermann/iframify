@@ -16,6 +16,10 @@
  */
 
 (function (global) {
+  function matches(node, selector) {
+    var fn = (node.matches || node.msMatchesSelector);
+    return fn.call(node, selector)
+  }
 
   /**
    * Check whether a CSS rule matters in regard to a node.
@@ -27,7 +31,7 @@
   function shouldAddRule (node, cssRule) {
     if (cssRule.cssRules) { // @media rule
       for (var k = 0; k < cssRule.cssRules.length; k += 1) {
-        if (node.matches(cssRule.cssRules[k].selectorText)) {
+        if (matches(node, cssRule.cssRules[k].selectorText)) {
           return true;
         }
       }
