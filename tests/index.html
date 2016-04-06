@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <style>.component--test-3 { color: rgb(255, 0, 0); }</style>
+    <style>.component--test-5 .component__element { font-weight: bold; }</style>
+    <meta charset="utf-8">
+    <title>Mocha Tests</title>
+    <link href="./index.css" rel="stylesheet" />
+    <link href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div id="mocha"></div>
+
+    <div class="test-suite">
+      <div class="test test-0">
+        <div class="iframify">
+          <div class="component">
+            <p class="component__element">Iframe creation.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="test test-1">
+        <div class="iframify">
+          <div class="component">
+            <p class="component__element">DOM import.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="test test-2">
+        <div class="iframify">
+          <div class="component" style="color: red">
+            <p class="component__element">Inline styles import.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="test test-3">
+        <div class="iframify">
+          <div class="component component--test-3">
+            <p class="component__element">Styles from &lt;style&gt; tags import.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="test test-4">
+        <div class="iframify">
+          <div class="component component--test-4">
+            <p class="component__element">Styles from external stylesheets import.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="test test-5">
+        <div class="iframify">
+          <div class="component component--test-5">
+            <p class="component__element">Styles for children import.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="test test-6">
+        <div class="iframify">
+          <div class="component component--test-6">
+            <p class="component__element">Styles from @media import.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="test test-7">
+        <div class="iframify">
+          <div class="component component--test-7">
+            <p class="component__element">Styles from @supports import.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="../iframify.js"></script>
+    <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
+    <script src="https://cdn.rawgit.com/Automattic/expect.js/0.3.1/index.js"></script>
+    <script>mocha.setup('bdd')</script>
+    <script src="./index.js"></script>
+    <script>
+      mocha.checkLeaks();
+      mocha.run();
+    </script>
+  </body>
+
+</html>

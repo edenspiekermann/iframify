@@ -1,0 +1,19 @@
+.component--test-4 {
+  color: rgb(0, 255, 0);
+}
+
+.component--test-5 .component__element {
+  color: rgb(0, 0, 255);
+}
+
+@media (min-width: 100px) {
+  .component--test-6 {
+    color: rgb(1, 33, 7);
+  }
+}
+
+@supports (color: rgb(0, 42, 0)) {
+  .component--test-7 {
+    color: rgb(0, 42, 0);
+  }
+}
