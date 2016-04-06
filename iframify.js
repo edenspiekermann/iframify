@@ -16,10 +16,31 @@
  */
 
 (function (global) {
+  function assign (target, source) {
+    if (Object.assign) {
+      return Object.assign.apply(null, arguments)
+    }
+  
+    var from;
+    var to = Object(target);
+    var symbols;
+
+    for (var s = 1; s < arguments.length; s++) {
+      from = Object(arguments[s]);
+
+      for (var key in from) {
+        if (hasOwnProperty.call(from, key)) to[key] = from[key];
+      }
+    }
+
+    return to;
+  }
+
   function matches(node, selector) {
     var fn = (node.matches || node.msMatchesSelector);
     return fn.call(node, selector)
   }
+
 
   /**
    * Check whether a CSS rule matters in regard to a node.
@@ -80,7 +101,7 @@
   function getStylesForTree (rootNode) {
     var children = rootNode.querySelectorAll('*');
     var rules = Array.prototype.reduce.call(children, function (tree, child) {
-      return Object.assign({}, tree, getRulesImpactingNode(child));
+      return assign({}, tree, getRulesImpactingNode(child));
     }, getRulesImpactingNode(rootNode));
 
     return Object.keys(rules).join('');
