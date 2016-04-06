@@ -29,5 +29,5 @@ Check out the [demo on CodePen](http://codepen.io/HugoGiraudel/pen/vGWpyr?editor
 
 ```
 python -m SimpleHTTPServer
-open tests/index.html
+# http://localhost:8000/tests/
 ```
