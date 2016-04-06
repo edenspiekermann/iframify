@@ -112,11 +112,12 @@
    * @param  {Node} node
    * @return {String}
    */
-  function getIframeContentForNode (node) {
+  function getIframeContentForNode (node, extraCSS) {
     return '<!doctype html>'
       + '<html lang="en">'
       + '<head>'
       + '<style>' + getStylesForTree(node) + '</style>'
+      + (extraCSS ? '<style>' + extraCSS + '</style>' : '')
       + '</head>'
       + '<body>' + node.innerHTML + '</body>'
       + '</html>';
@@ -145,9 +146,9 @@
    * @param  {NodeList} nodes
    * @return undefined
    */
-  function iframify (node) {
+  function iframify (node, extraCSS) {
     var iframe = document.createElement('iframe');
-    var html = getIframeContentForNode(node);
+    var html = getIframeContentForNode(node, extraCSS);
     iframe.srcdoc = html;
     iframe.src = 'data:text/html;charset=utf-8,' + encodeURI(html);
     node.parentNode.replaceChild(iframe, node);
