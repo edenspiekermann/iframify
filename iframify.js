@@ -8,7 +8,7 @@
  * For instance:
  * 
  * var componentContainers = document.querySelectorAll('.styleguide-component-container')
- * iframify(componentContainers)
+ * Array.prototype.forEach.call(componentContainers, iframify)
  * 
  * Demo:
  * 
@@ -26,7 +26,7 @@
    */
   function shouldAddRule (node, cssRule) {
     if (cssRule.cssRules) { // @media rule
-      for (var k = 0; k < cssRule.cssRules.length; ++k) {
+      for (var k = 0; k < cssRule.cssRules.length; k += 1) {
         if (node.matches(cssRule.cssRules[k].selectorText)) {
           return true;
         }
@@ -51,11 +51,11 @@
     var stylesheets = document.styleSheets;
     var object = {};
 
-    for (var i = 0; i < stylesheets.length; ++i) {
+    for (var i = 0; i < stylesheets.length; i += 1) {
       var cssRules = stylesheets[i].cssRules || stylesheets[i].rules;
       if (!cssRules) continue;
 
-      for (var j = 0; j < cssRules.length; ++j) {
+      for (var j = 0; j < cssRules.length; j += 1) {
         if (shouldAddRule(node, cssRules[j])) {
           object[cssRules[j].cssText] = true;
         }
@@ -68,6 +68,7 @@
   /**
    * Get string representation of all the styles relevant to a root node and all
    * its children.
+   *
    * 
    * @param  {Node} rootNode
    * @return {String}
