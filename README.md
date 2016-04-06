@@ -15,6 +15,15 @@ var components = document.querySelectorAll('.component');
 Array.prototype.forEach.call(components, iframify);
 ```
 
+It is also possible to pass extra CSS to be injected in the iframe.
+
+```js
+// Single node
+var component = document.querySelector('.component');
+var extraCSS = '.my-custom { content: ""; }';
+iframify(component, extraCSS);
+```
+
 Check out the [demo on CodePen](http://codepen.io/HugoGiraudel/pen/vGWpyr?editors=1000).
 
 

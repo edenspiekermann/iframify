@@ -141,4 +141,22 @@ describe('iframify', function () {
       done();
     }
   });
+
+  it('should allow passing extra CSS', function (done) {
+    var test = document.querySelector('.test-8 > .iframify');
+    iframify(test, '.component--test-8 { font-style: italic }');
+    var iframe = document.querySelector('.test-8 > iframe');
+
+    iframe.onload = function () {
+      var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
+      var component = iframeDocument.querySelector('.component');
+
+      var actual = iframe.contentWindow.getComputedStyle(component).getPropertyValue('font-style');
+      var expected = 'italic';
+
+      expect(actual).to.be.equal(expected);
+
+      done();
+    }
+  });
 });
