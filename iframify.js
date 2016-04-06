@@ -4,26 +4,25 @@
  *
  * It can be useful when working with a styleguide displaying components, in
  * order to replicate element queries on a component level.
- * 
+ *
  * For instance:
- * 
+ *
  * var componentContainers = document.querySelectorAll('.styleguide-component-container')
  * Array.prototype.forEach.call(componentContainers, iframify)
- * 
+ *
  * Demo:
- * 
+ *
  * http://codepen.io/HugoGiraudel/pen/vGWpyr
  */
 
 (function (global) {
   function assign (target, source) {
     if (Object.assign) {
-      return Object.assign.apply(null, arguments)
+      return Object.assign.apply(null, arguments);
     }
-  
+
     var from;
     var to = Object(target);
-    var symbols;
 
     for (var s = 1; s < arguments.length; s++) {
       from = Object(arguments[s]);
@@ -36,15 +35,14 @@
     return to;
   }
 
-  function matches(node, selector) {
+  function matches (node, selector) {
     var fn = (node.matches || node.msMatchesSelector);
-    return fn.call(node, selector)
+    return fn.call(node, selector);
   }
-
 
   /**
    * Check whether a CSS rule matters in regard to a node.
-   * 
+   *
    * @param {Node} node
    * @param {CSSStyleDeclaration} cssRule
    * @return {Boolean}
@@ -68,7 +66,7 @@
    * rules, and the values are always `true`. Storing in an object instead of
    * a string or an array makes it possible to prevent duplicated rules without
    * having too much of a performance hit.
-   * 
+   *
    * @param  {Node} node
    * @return {Object} - Keys are rules, values are `true`
    */
@@ -85,7 +83,7 @@
           object[cssRules[j].cssText] = true;
         }
       }
-    } 
+    }
 
     return object;
   }
@@ -94,7 +92,6 @@
    * Get string representation of all the styles relevant to a root node and all
    * its children.
    *
-   * 
    * @param  {Node} rootNode
    * @return {String}
    */
@@ -109,22 +106,24 @@
 
   /**
    * Get the content for the iframified version of a node.
+   *
    * @param  {Node} node
    * @return {String}
    */
   function getIframeContentForNode (node, extraCSS) {
-    return '<!doctype html>'
-      + '<html lang="en">'
-      + '<head>'
-      + '<style>' + getStylesForTree(node) + '</style>'
-      + (extraCSS ? '<style>' + extraCSS + '</style>' : '')
-      + '</head>'
-      + '<body>' + node.innerHTML + '</body>'
-      + '</html>';
+    return '<!doctype html>' +
+      '<html lang="en">' +
+      '<head>' +
+      '<style>' + getStylesForTree(node) + '</style>' +
+      (extraCSS ? '<style>' + extraCSS + '</style>' : '') +
+      '</head>' +
+      '<body>' + node.innerHTML + '</body>' +
+      '</html>';
   }
 
   /**
    * Get document height (stackoverflow.com/questions/1145850/)
+   *
    * @param  {Document} doc
    * @return {Number}
    */
@@ -142,7 +141,7 @@
   /**
    * Transform a collection of nodes into an iframe version of themselves
    * including all the styles they need to perform correctly.
-   * 
+   *
    * @param  {NodeList} nodes
    * @return undefined
    */
@@ -166,5 +165,4 @@
   }
 
   global.iframify = iframify;
-
-}(window))
+}(window));
