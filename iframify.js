@@ -68,12 +68,12 @@
 
     if (!('srcdoc' in iframe)) {
       console.log(
-        'Your browser does not support the `srcdoc` attribute on <iframe>.' +
-        'Therefore, it is not possible to wrap node in an iframe because of' +
-        ' CORS policy. :('
+        'Your browser does not support the `srcdoc` attribute on elements.' +
+        'Therefore, it is not possible to wrap this node with an iframe due' +
+        'to CORS policy.'
       )
 
-      return false;
+      return null;
     }
 
     node.parentNode.replaceChild(iframe, node);
