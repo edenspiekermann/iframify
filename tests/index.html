@@ -5,6 +5,7 @@
     <style>.component--test-3 { color: rgb(255, 0, 0); }</style>
     <style>.component--test-5 .component__element { font-weight: bold; }</style>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Mocha Tests</title>
     <link href="./index.css" rel="stylesheet" />
     <link href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet" />
@@ -81,7 +82,23 @@
       <div class="test test-8">
         <div class="iframify">
           <div class="component component--test-8">
-            <p class="component__element">Styles from @supports import.</p>
+            <p class="component__element">Extra styles import.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="test test-9">
+        <div class="iframify">
+          <div class="component component--test-9">
+            <p class="component__element">Meta viewport import.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="test test-10">
+        <div class="iframify">
+          <div class="component component--test-10">
+            <p class="component__element">Meta charset import.</p>
           </div>
         </div>
       </div>

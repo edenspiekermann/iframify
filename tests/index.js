@@ -159,4 +159,38 @@ describe('iframify', function () {
       done();
     }
   });
+
+  it('should import the meta viewport if any', function (done) {
+    var test = document.querySelector('.test-9 > .iframify');
+    var iframe = iframify(test);
+
+    iframe.onload = function () {
+      var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
+      var meta = iframeDocument.querySelector('meta[name="viewport"]');
+      console.log(meta)
+
+      var actual = meta;
+
+      expect(actual).to.be.ok();
+
+      done();
+    }
+  });
+
+  it('should import the meta charset if any', function (done) {
+    var test = document.querySelector('.test-10 > .iframify');
+    var iframe = iframify(test);
+
+    iframe.onload = function () {
+      var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
+      var meta = iframeDocument.querySelector('meta[charset]');
+      console.log(meta)
+
+      var actual = meta;
+
+      expect(actual).to.be.ok();
+
+      done();
+    }
+  });
 });

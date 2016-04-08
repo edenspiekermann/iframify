@@ -16,6 +16,8 @@
  */
 
 (function (global) {
+  var metaViewport = document.querySelector('meta[name="viewport"]');
+  var metaCharset = document.querySelector('meta[charset]');
   var stylesheets = Array.prototype.map.call(
     document.querySelectorAll('link[rel*=stylesheet], style'),
     function (stylesheet) { return stylesheet.outerHTML; }
@@ -29,8 +31,11 @@
    */
   function getIframeContentForNode (node, extraCSS) {
     return '<!doctype html>' +
-      '<html lang="en">' +
-      '<head>' + stylesheets +
+      '<html>' +
+      '<head>' +
+      (metaCharset ? metaCharset.outerHTML : '') +
+      (metaViewport ? metaViewport.outerHTML : '') +
+      (stylesheets.length ? stylesheets : '') +
       (extraCSS ? '<style>' + extraCSS + '</style>' : '') +
       '</head>' +
       '<body>' + node.innerHTML + '</body>' +
