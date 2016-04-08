@@ -8,11 +8,11 @@ Replaces a node with an iframe version of itself. Read [the introduction article
 ```js
 // Single node
 var component = document.querySelector('.component');
-iframify(component);
+var iframe = iframify(component);
 
 // Collection of nodes
 var components = document.querySelectorAll('.component');
-Array.prototype.forEach.call(components, iframify);
+var iframes = Array.prototype.map.call(components, iframify);
 ```
 
 It is also possible to pass extra CSS to be injected in the iframe.
@@ -21,7 +21,7 @@ It is also possible to pass extra CSS to be injected in the iframe.
 // Single node
 var component = document.querySelector('.component');
 var extraCSS = '.my-custom { content: ""; }';
-iframify(component, extraCSS);
+var iframe = iframify(component, extraCSS);
 ```
 
 Check out the [demo on CodePen](http://codepen.io/HugoGiraudel/pen/vGWpyr?editors=1000).
@@ -29,14 +29,12 @@ Check out the [demo on CodePen](http://codepen.io/HugoGiraudel/pen/vGWpyr?editor
 
 ## Notes
 
-* External stylesheets cannot be parsed on the file system (`file:///`). It works fine with a local server though.
-* On browsers which do not support the `srcdoc` attribute on `<iframe>`, iframes cannot be resized to fit the height of their component.
+* Does not work on browsers which do not support the `srcdoc` attribute on `<iframe>`.
 * JavaScript is not imported into the iframes.
 
 
 ## Tests
 
 ```
-python -m SimpleHTTPServer
-# http://localhost:8000/tests/
+open tests/index.html
 ```
