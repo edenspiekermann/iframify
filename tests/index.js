@@ -198,4 +198,52 @@ describe('iframify', function () {
       done();
     };
   });
+
+  it('should allow passing a custom meta charset', function (done) {
+    var test = document.querySelector('.test-13 > .iframify');
+    var iframe = iframify(test, {
+      metaCharset: '<meta charset="utf-16">'
+    });
+
+    iframe.onload = function () {
+      var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
+      var meta = iframeDocument.querySelector('meta[charset]');
+      var actual = meta.getAttribute('charset');
+      var expected = 'utf-16';
+      expect(actual).to.be.equal(expected);
+      done();
+    };
+  });
+
+  it('should allow passing a custom meta viewport', function (done) {
+    var test = document.querySelector('.test-14 > .iframify');
+    var iframe = iframify(test, {
+      metaViewport: '<meta name="viewport" content="initial-scale=1">'
+    });
+
+    iframe.onload = function () {
+      var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
+      var meta = iframeDocument.querySelector('meta[name="viewport"]');
+      var actual = meta.getAttribute('content');
+      var expected = 'initial-scale=1';
+      expect(actual).to.be.equal(expected);
+      done();
+    };
+  });
+
+  it('should allow passing a custom styles selector', function (done) {
+    var test = document.querySelector('.test-15 > .iframify');
+    var iframe = iframify(test, {
+      stylesSelector: 'style'
+    });
+
+    iframe.onload = function () {
+      var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
+      var component = iframeDocument.querySelector('.component');
+      var actual = iframe.contentWindow.getComputedStyle(component).getPropertyValue('color');
+      var expected = 'rgb(0, 0, 0)';
+      expect(actual).to.be.equal(expected);
+      done();
+    };
+  });
 });

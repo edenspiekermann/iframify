@@ -11,9 +11,47 @@ iframify(HTMLElement, [options])
 
 Where options is an object where keys can be:
 
-* `styles` *(string)*: extra styles to be injected in a `<style>` tag in the `<head>`;
-* `htmlAttr` *(object)*: an object of attributes to pass to the `<html>` element;
-* `bodyAttr` *(object)*: an object of attributes to pass to the `<body>` element.
+* **`styles`**  
+  **Type:** `string`  
+  **Default:** none  
+  **Description:** Extra styles to be injected in a `<style>` tag in the `<head>`.  
+  **Example:** `.component { color: red }`
+
+* **`htmlAttr`**  
+  **Type:** `object`  
+  **Default:** none  
+  **Description:** An object of attributes to pass to the `<html>` element.  
+  **Example:** `{ class: 'no-js', 'data-foo': 'bar' }`
+
+* **`bodyAttr`**  
+  **Type:** `object`  
+  **Default:** none  
+  **Description:** An object of attributes to pass to the `<body>` element.  
+  **Example:** `{ class: 'body', id: 'top' }`
+
+* **`stylesSelector`**  
+  **Type:** `string`  
+  **Default:** `link[rel*=stylesheet], style`  
+  **Description:** The selector to use to define what styles to import.  
+  **Example:** `link[rel*=stylesheet]:not([href$="styleguide.css"]), style`
+
+* **`metaCharset`**  
+  **Type:** `string`  
+  **Default:** the one in the outer document (if any).  
+  **Description:** The string representation of the charset `<meta>` tag to import.  
+  **Example:** `<meta charset="utf-8" />`
+
+* **`metaViewport`**  
+  **Type:** `string`  
+  **Default:** the one in the outer document (if any).  
+  **Description:** The string representation of the viewport `<meta>` tag to import.  
+  **Example:** `<meta name="viewport" content="width=device-width, initial-scale=1">`
+
+* **`sizingTimeout`**  
+  **Type:** `number`  
+  **Default:** `500`  
+  **Description:** Number of milliseconds to wait before sizing the height of the iframe based on its content. Can be useful when injecting asynchronously loaded content.  
+  **Example:** `1000`
 
 ## Examples
 
@@ -30,26 +68,11 @@ var iframes = Array.prototype.map.call(components, iframify);
 ```
 
 ```js
-// <html> attributes
+// With options
 var component = document.querySelector('.component');
 var iframe = iframify(component, {
-  htmlAttr: { class: 'no-js', 'data-foo': 'bar' }
-});
-```
-
-```js
-// <body> attributes
-var component = document.querySelector('.component');
-var iframe = iframify(component, {
-  bodyAttr: { class: 'body', id: 'top' }
-});
-```
-
-```js
-// Extra styles
-var component = document.querySelector('.component');
-var iframe = iframify(component, {
-  styles: '.my-custom { content: ""; }'
+  styles: '.component { color: red; }',
+  metaViewport: '<meta name="viewport" content="width=device-width">'
 });
 ```
 

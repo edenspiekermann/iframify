@@ -1,27 +1,26 @@
-/**
- * iframify is a script that replaces a node with a dynamically generated iframe
- * verson of itself, including all its necessary styles to perform correctly.
- *
- * It can be useful when working with a styleguide displaying components, in
- * order to replicate element queries on a component level.
- *
- * For instance:
- *
- * var componentContainers = document.querySelectorAll('.styleguide-component-container')
- * Array.prototype.forEach.call(componentContainers, iframify)
- *
- * Demo:
- *
- * http://codepen.io/HugoGiraudel/pen/vGWpyr
- */
-
 (function (global) {
   var metaViewport = document.querySelector('meta[name="viewport"]');
   var metaCharset = document.querySelector('meta[charset]');
-  var stylesheets = Array.prototype.map.call(
-    document.querySelectorAll('link[rel*=stylesheet], style'),
-    function (stylesheet) { return stylesheet.outerHTML; }
-  ).join('');
+  var queryCache = {};
+
+  /**
+   * Get the styling nodes to inject in the head of the embedded document
+   *
+   * @param  {String} selector
+   * @return {String}
+   */
+  function getStylingNodes (selector) {
+    if (typeof queryCache[selector] === 'undefined') {
+      queryCache[selector] = Array.prototype.map.call(
+        document.querySelectorAll(selector),
+        function (stylesheet) {
+          return stylesheet.outerHTML;
+        }
+      ).join('');
+    }
+
+    return queryCache[selector];
+  }
 
   /**
    * Get the content for the iframified version of a node.
@@ -32,14 +31,14 @@
    */
   function getIframeContentForNode (node, options) {
     return '<!doctype html>' +
-      '<html ' + formatAttributes(options.htmlAttr) + '>' +
+      '<html ' + options.htmlAttr + '>' +
       '<head>' +
-        (metaCharset ? metaCharset.outerHTML : '') +
-        (metaViewport ? metaViewport.outerHTML : '') +
-        (stylesheets.length ? stylesheets : '') +
-        (options.styles ? '<style>' + options.styles + '</style>' : '') +
+        options.metaCharset +
+        options.metaViewport +
+        options.stylesheets +
+        options.styles +
       '</head>' +
-      '<body ' + formatAttributes(options.bodyAttr) + '>' +
+      '<body ' + options.bodyAttr + '>' +
         node.innerHTML +
       '</body>' +
       '</html>';
@@ -52,7 +51,6 @@
    * @return {String}
    */
   function formatAttributes (attrObj) {
-    attrObj = attrObj || {};
     var attributes = [];
 
     for (var attribute in attrObj) {
@@ -79,6 +77,19 @@
     );
   }
 
+  function getOptions (options) {
+    var opts = options || {};
+    opts.htmlAttr = formatAttributes(opts.htmlAttr || {});
+    opts.bodyAttr = formatAttributes(opts.bodyAttr || {});
+    opts.sizingTimeout = opts.sizingTimeout || 500;
+    opts.styles = (opts.styles ? '<style>' + opts.styles + '</style>' : '');
+    opts.stylesheets = getStylingNodes(opts.stylesSelector || 'link[rel*=stylesheet], style');
+    opts.metaCharset = opts.metaCharset || metaCharset.outerHTML;
+    opts.metaViewport = opts.metaViewport || metaViewport.outerHTML;
+
+    return opts;
+  }
+
   /**
    * Transform a collection of nodes into an iframe version of themselves
    * including all the styles they need to perform correctly.
@@ -88,7 +99,8 @@
    * @return undefined
    */
   function iframify (node, options) {
-    options = options || {};
+    options = getOptions(options);
+
     var iframe = document.createElement('iframe');
     var html = getIframeContentForNode(node, options);
     iframe.srcdoc = html;
@@ -108,7 +120,7 @@
     setTimeout(function () {
       var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
       iframe.height = getDocumentHeight(iframeDocument);
-    }, 500);
+    }, options.sizingTimeout);
 
     return iframe;
   }
