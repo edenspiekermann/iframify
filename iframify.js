@@ -84,8 +84,8 @@
     opts.sizingTimeout = opts.sizingTimeout || 500;
     opts.styles = (opts.styles ? '<style>' + opts.styles + '</style>' : '');
     opts.stylesheets = getStylingNodes(opts.stylesSelector || 'link[rel*=stylesheet], style');
-    opts.metaCharset = opts.metaCharset || metaCharset.outerHTML;
-    opts.metaViewport = opts.metaViewport || metaViewport.outerHTML;
+    opts.metaCharset = opts.metaCharset || metaCharset && metaCharset.outerHTML;
+    opts.metaViewport = opts.metaViewport || metaViewport && metaViewport.outerHTML;
 
     return opts;
   }
