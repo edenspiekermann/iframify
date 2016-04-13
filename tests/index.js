@@ -1,7 +1,9 @@
+/* global describe, after, it, expect, iframify */
+
 describe('iframify', function () {
   after(function () {
     document.querySelector('.test-suite').style.display = 'none';
-  })
+  });
 
   it('should create an iframe', function () {
     var test = document.querySelector('.test-0 > .iframify');
@@ -15,12 +17,11 @@ describe('iframify', function () {
     var iframe = iframify(test);
 
     iframe.onload = function () {
-      var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
       var actual = initialHTML;
       var expected = iframe.contentDocument.body.innerHTML;
       expect(actual).to.be.equal(expected);
       done();
-    }
+    };
   });
 
   it('should import conserve inline styles', function (done) {
@@ -34,7 +35,7 @@ describe('iframify', function () {
       var expected = 'color: red';
       expect(actual).to.be.equal(expected);
       done();
-    }
+    };
   });
 
   it('should import relevant styles from <style> tags', function (done) {
@@ -48,7 +49,7 @@ describe('iframify', function () {
       var expected = 'rgb(255, 0, 0)';
       expect(actual).to.be.equal(expected);
       done();
-    }
+    };
   });
 
   it('should import relevant styles from external stylesheets', function (done) {
@@ -62,7 +63,7 @@ describe('iframify', function () {
       var expected = 'rgb(0, 255, 0)';
       expect(actual).to.be.equal(expected);
       done();
-    }
+    };
   });
 
   it('should import styles for children', function (done) {
@@ -79,7 +80,7 @@ describe('iframify', function () {
       expected = 'bold';
       expect(actual).to.be.equal(expected);
       done();
-    }
+    };
   });
 
   it('should import @media declarations', function (done) {
@@ -93,7 +94,7 @@ describe('iframify', function () {
       var expected = 'rgb(1, 33, 7)';
       expect(actual).to.be.equal(expected);
       done();
-    }
+    };
   });
 
   it('should import @supports declarations', function (done) {
@@ -107,12 +108,14 @@ describe('iframify', function () {
       var expected = 'rgb(0, 42, 0)';
       expect(actual).to.be.equal(expected);
       done();
-    }
+    };
   });
 
   it('should allow passing extra CSS', function (done) {
     var test = document.querySelector('.test-8 > .iframify');
-    var iframe = iframify(test, '.component--test-8 { font-style: italic }');
+    var iframe = iframify(test, {
+      styles: '.component--test-8 { font-style: italic }'
+    });
 
     iframe.onload = function () {
       var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
@@ -121,7 +124,7 @@ describe('iframify', function () {
       var expected = 'italic';
       expect(actual).to.be.equal(expected);
       done();
-    }
+    };
   });
 
   it('should import the meta viewport if any', function (done) {
@@ -134,7 +137,7 @@ describe('iframify', function () {
       var actual = meta;
       expect(actual).to.be.ok();
       done();
-    }
+    };
   });
 
   it('should import the meta charset if any', function (done) {
@@ -147,6 +150,52 @@ describe('iframify', function () {
       var actual = meta;
       expect(actual).to.be.ok();
       done();
-    }
+    };
+  });
+
+  it('should allow passing attributes to <html>', function (done) {
+    var test = document.querySelector('.test-11 > .iframify');
+    var iframe = iframify(test, {
+      htmlAttr: {
+        'class': 'no-js',
+        'data-foo': 'bar'
+      }
+    });
+
+    iframe.onload = function () {
+      var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
+      var html = iframeDocument.querySelector('html');
+      var actual = html.getAttribute('class');
+      var expected = 'no-js';
+      expect(actual).to.be.equal(expected);
+
+      actual = html.getAttribute('data-foo');
+      expected = 'bar';
+      expect(actual).to.be.equal(expected);
+      done();
+    };
+  });
+
+  it('should allow passing attributes to <body>', function (done) {
+    var test = document.querySelector('.test-12 > .iframify');
+    var iframe = iframify(test, {
+      bodyAttr: {
+        'class': 'body',
+        'data-bar': 'foo'
+      }
+    });
+
+    iframe.onload = function () {
+      var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
+      var body = iframeDocument.querySelector('body');
+      var actual = body.getAttribute('class');
+      var expected = 'body';
+      expect(actual).to.be.equal(expected);
+
+      actual = body.getAttribute('data-bar');
+      expected = 'foo';
+      expect(actual).to.be.equal(expected);
+      done();
+    };
   });
 });

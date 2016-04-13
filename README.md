@@ -5,23 +5,52 @@ Replaces a node with an iframe version of itself. Read [the introduction article
 
 ## Usage
 
+```
+iframify(HTMLElement, [options])
+```
+
+Where options is an object where keys can be:
+
+* `styles` *(string)*: extra styles to be injected in a `<style>` tag in the `<head>`;
+* `htmlAttr` *(object)*: an object of attributes to pass to the `<html>` element;
+* `bodyAttr` *(object)*: an object of attributes to pass to the `<body>` element.
+
+## Examples
+
 ```js
 // Single node
 var component = document.querySelector('.component');
 var iframe = iframify(component);
+```
 
+```js
 // Collection of nodes
 var components = document.querySelectorAll('.component');
 var iframes = Array.prototype.map.call(components, iframify);
 ```
 
-It is also possible to pass extra CSS to be injected in the iframe.
+```js
+// <html> attributes
+var component = document.querySelector('.component');
+var iframe = iframify(component, {
+  htmlAttr: { class: 'no-js', 'data-foo': 'bar' }
+});
+```
 
 ```js
-// Single node
+// <body> attributes
 var component = document.querySelector('.component');
-var extraCSS = '.my-custom { content: ""; }';
-var iframe = iframify(component, extraCSS);
+var iframe = iframify(component, {
+  bodyAttr: { class: 'body', id: 'top' }
+});
+```
+
+```js
+// Extra styles
+var component = document.querySelector('.component');
+var iframe = iframify(component, {
+  styles: '.my-custom { content: ""; }'
+});
 ```
 
 Check out the [demo on CodePen](http://codepen.io/HugoGiraudel/pen/vGWpyr?editors=1000).

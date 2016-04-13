@@ -26,20 +26,40 @@
   /**
    * Get the content for the iframified version of a node.
    *
-   * @param  {Node} node
+   * @param  {HTMLElement} node
+   * @param  {Object} options
    * @return {String}
    */
-  function getIframeContentForNode (node, extraCSS) {
+  function getIframeContentForNode (node, options) {
     return '<!doctype html>' +
-      '<html>' +
+      '<html ' + formatAttributes(options.htmlAttr) + '>' +
       '<head>' +
-      (metaCharset ? metaCharset.outerHTML : '') +
-      (metaViewport ? metaViewport.outerHTML : '') +
-      (stylesheets.length ? stylesheets : '') +
-      (extraCSS ? '<style>' + extraCSS + '</style>' : '') +
+        (metaCharset ? metaCharset.outerHTML : '') +
+        (metaViewport ? metaViewport.outerHTML : '') +
+        (stylesheets.length ? stylesheets : '') +
+        (options.styles ? '<style>' + options.styles + '</style>' : '') +
       '</head>' +
-      '<body>' + node.innerHTML + '</body>' +
+      '<body ' + formatAttributes(options.bodyAttr) + '>' +
+        node.innerHTML +
+      '</body>' +
       '</html>';
+  }
+
+  /**
+   * Format an object of attributes into a HTML string
+   *
+   * @param  {Object} attrObj
+   * @return {String}
+   */
+  function formatAttributes (attrObj) {
+    attrObj = attrObj || {};
+    var attributes = [];
+
+    for (var attribute in attrObj) {
+      attributes.push(attribute + '="' + attrObj[attribute] + '"');
+    }
+
+    return attributes.join(' ');
   }
 
   /**
@@ -63,12 +83,14 @@
    * Transform a collection of nodes into an iframe version of themselves
    * including all the styles they need to perform correctly.
    *
-   * @param  {NodeList} nodes
+   * @param  {HTMLElement} nodes
+   * @param  {Object} options
    * @return undefined
    */
-  function iframify (node, extraCSS) {
+  function iframify (node, options) {
+    options = options || {};
     var iframe = document.createElement('iframe');
-    var html = getIframeContentForNode(node, extraCSS);
+    var html = getIframeContentForNode(node, options);
     iframe.srcdoc = html;
 
     if (!('srcdoc' in iframe)) {
@@ -76,7 +98,7 @@
         'Your browser does not support the `srcdoc` attribute on elements.' +
         'Therefore, it is not possible to wrap this node with an iframe due' +
         'to CORS policy.'
-      )
+      );
 
       return null;
     }
