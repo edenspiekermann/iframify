@@ -1,6 +1,8 @@
 (function (global) {
   var metaViewport = document.querySelector('meta[name="viewport"]');
   var metaCharset = document.querySelector('meta[charset]');
+  var metaViewportStr = metaViewport && metaViewport.outerHTML || '';
+  var metaCharsetStr = metaCharset && metaCharset.outerHTML || '';
   var queryCache = {};
 
   /**
@@ -84,8 +86,8 @@
     opts.sizingTimeout = opts.sizingTimeout || 500;
     opts.styles = (opts.styles ? '<style>' + opts.styles + '</style>' : '');
     opts.stylesheets = getStylingNodes(opts.stylesSelector || 'link[rel*=stylesheet], style');
-    opts.metaCharset = opts.metaCharset || metaCharset && metaCharset.outerHTML;
-    opts.metaViewport = opts.metaViewport || metaViewport && metaViewport.outerHTML;
+    opts.metaCharset = opts.metaCharset || metaCharsetStr;
+    opts.metaViewport = opts.metaViewport || metaViewportStr;
 
     return opts;
   }
