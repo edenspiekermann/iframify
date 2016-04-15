@@ -64,7 +64,9 @@ var iframe = iframify(component);
 ```js
 // Collection of nodes
 var components = document.querySelectorAll('.component');
-var iframes = Array.prototype.map.call(components, iframify);
+var iframes = Array.prototype.map.call(components, function (component) {
+  iframify(component, {});
+});
 ```
 
 ```js
