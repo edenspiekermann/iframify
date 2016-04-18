@@ -3,6 +3,13 @@
 Replaces a node with an iframe version of itself. Read [the introduction article](http://dev.edenspiekermann.com/2016/04/05/introducing-iframify/).
 
 
+## Install
+
+```
+npm install iframify
+```
+
+
 ## Usage
 
 ```
@@ -52,6 +59,7 @@ Where options is an object where keys can be:
   **Default:** `500`  
   **Description:** Number of milliseconds to wait before sizing the height of the iframe based on its content. Can be useful when injecting asynchronously loaded content.  
   **Example:** `1000`
+
 
 ## Examples
 
