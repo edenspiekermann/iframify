@@ -1,0 +1,27 @@
+{
+  "name": "iframify",
+  "version": "0.1.0",
+  "description": "Replaces a node with an iframe version of itself.",
+  "main": "iframify.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HugoGiraudel/iframify.git"
+  },
+  "keywords": [
+    "iframify",
+    "iframe",
+    "styleguide"
+  ],
+  "author": "Hugo Giraudel <h.giraudel@de.edenspiekermann.com> (http://www.edenspiekermann.com/people/hugo-giraudel)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/HugoGiraudel/iframify/issues"
+  },
+  "homepage": "https://github.com/HugoGiraudel/iframify#readme"
+}
