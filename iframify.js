@@ -104,19 +104,7 @@
     options = getOptions(options);
 
     var iframe = document.createElement('iframe');
-    var html = getIframeContentForNode(node, options);
-    iframe.srcdoc = html;
-
-    if (!('srcdoc' in iframe)) {
-      console.log(
-        'Your browser does not support the `srcdoc` attribute on elements.' +
-        'Therefore, it is not possible to wrap this node with an iframe due' +
-        'to CORS policy.'
-      );
-
-      return null;
-    }
-
+    iframe.srcdoc = getIframeContentForNode(node, options);
     node.parentNode.replaceChild(iframe, node);
 
     setTimeout(function () {
