@@ -91,8 +91,9 @@ Check out the [demo on CodePen](http://codepen.io/HugoGiraudel/pen/vGWpyr?editor
 
 ## Notes
 
-* Does not work on browsers which do not support the `srcdoc` attribute on `<iframe>`.
-* JavaScript is not imported into the iframes.
+It does not work on [browsers which do not support the `srcdoc` attribute](http://caniuse.com/#feat=iframe-srcdoc) on `<iframe>` out of the box. However, there is [a very good polyfill for `srcdoc`](https://github.com/jugglinmike/srcdoc-polyfill) that you could include after iframify to make it work on these browsers.
+
+Other major thing to note: JavaScript is not imported into the iframes.
 
 
 ## Tests
