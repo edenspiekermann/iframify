@@ -6,7 +6,7 @@ Replaces a node with an iframe version of itself. Read [the introduction article
 ## Install
 
 ```
-npm install iframify
+npm install edenspiekermann/iframify
 ```
 
 
