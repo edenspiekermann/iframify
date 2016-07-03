@@ -42,6 +42,7 @@
       '</head>' +
       '<body ' + options.bodyAttr + '>' +
         node.innerHTML +
+        options.scripts +
       '</body>' +
       '</html>';
   }
@@ -88,6 +89,7 @@
     opts.stylesheets = getStylingNodes(opts.stylesSelector || 'link[rel*=stylesheet], style');
     opts.metaCharset = opts.metaCharset || metaCharsetStr;
     opts.metaViewport = opts.metaViewport || metaViewportStr;
+    opts.scripts = opts.scripts || '';
 
     return opts;
   }

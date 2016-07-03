@@ -246,4 +246,20 @@ describe('iframify', function () {
       done();
     };
   });
+
+  it('should allow passing a custom styles selector', function (done) {
+    var test = document.querySelector('.test-16 > .iframify');
+    var iframe = iframify(test, {
+      scripts: '<script>document.querySelector(".component").style.color = "red";</script>'
+    });
+
+    iframe.onload = function () {
+      var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
+      var component = iframeDocument.querySelector('.component');
+      var actual = iframe.contentWindow.getComputedStyle(component).getPropertyValue('color');
+      var expected = 'rgb(255, 0, 0)';
+      expect(actual).to.be.equal(expected);
+      done();
+    };
+  });
 });

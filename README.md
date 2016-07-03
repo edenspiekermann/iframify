@@ -24,6 +24,12 @@ Where options is an object where keys can be:
   **Description:** Extra styles to be injected in a `<style>` tag in the `<head>`.  
   **Example:** `.component { color: red }`
 
+* **`scripts`**  
+  **Type:** `string`  
+  **Default:** none  
+  **Description:** Extra scripts to be injected at the bottom of the `<body>`.  
+  **Example:** `<script src="/assets/js/main.js"></script>`
+
 * **`htmlAttr`**  
   **Type:** `object`  
   **Default:** none  
@@ -93,7 +99,7 @@ Check out the [demo on CodePen](http://codepen.io/HugoGiraudel/pen/vGWpyr?editor
 
 It does not work on [browsers which do not support the `srcdoc` attribute](http://caniuse.com/#feat=iframe-srcdoc) on `<iframe>` out of the box. However, there is [a very good polyfill for `srcdoc`](https://github.com/jugglinmike/srcdoc-polyfill) that you could include after iframify to make it work on these browsers.
 
-Other major thing to note: JavaScript is not imported into the iframes.
+Other major thing to note: JavaScript is not imported into the iframes, but can be with `scripts` option.
 
 
 ## Tests
