@@ -18,16 +18,16 @@ iframify(HTMLElement, [options])
 
 Where options is an object where keys can be:
 
-* **`headExtra`**
-  **Type:** `string`
-  **Default:** none
-  **Description:** extra content to be injected at the end of `<head>`.
+* **`headExtra`**  
+  **Type:** `string`  
+  **Default:** none  
+  **Description:** extra content to be injected at the end of `<head>`.  
   **Example:** `<link rel="stylesheet" href="foo.css" />`
 
-* **`bodyExtra`**
-  **Type:** `string`
-  **Default:** none
-  **Description:** extra content to be injected at the end of `<body>`.
+* **`bodyExtra`**  
+  **Type:** `string`  
+  **Default:** none  
+  **Description:** extra content to be injected at the end of `<body>`.  
   **Example:** `<script src="/assets/js/main.js"></script>`
 
 * **`htmlAttr`**  
