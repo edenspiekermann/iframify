@@ -27,7 +27,7 @@ Where options is an object where keys can be:
 * **`bodyExtra`**  
   **Type:** `string`  
   **Default:** none  
-  **Description:** extra content to be injected at the end of `<body>`.  
+  **Description:** extra content to be injected at the end of `<body>`.  g
   **Example:** `<script src="/assets/js/main.js"></script>`
 
 * **`htmlAttr`**  
@@ -87,7 +87,7 @@ var iframes = Array.prototype.map.call(components, function (component) {
 // With options
 var component = document.querySelector('.component');
 var iframe = iframify(component, {
-  styles: '.component { color: red; }',
+  headExtra: '<style>.component { color: red; }</style>',
   metaViewport: '<meta name="viewport" content="width=device-width">'
 });
 ```
