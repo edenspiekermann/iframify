@@ -18,16 +18,16 @@ iframify(HTMLElement, [options])
 
 Where options is an object where keys can be:
 
-* **`styles`**  
-  **Type:** `string`  
-  **Default:** none  
-  **Description:** Extra styles to be injected in a `<style>` tag in the `<head>`.  
-  **Example:** `.component { color: red }`
+* **`headExtra`**
+  **Type:** `string`
+  **Default:** none
+  **Description:** extra content to be injected at the end of `<head>`.
+  **Example:** `<link rel="stylesheet" href="foo.css" />`
 
-* **`scripts`**  
-  **Type:** `string`  
-  **Default:** none  
-  **Description:** Extra scripts to be injected at the bottom of the `<body>`.  
+* **`bodyExtra`**
+  **Type:** `string`
+  **Default:** none
+  **Description:** extra content to be injected at the end of `<body>`.
   **Example:** `<script src="/assets/js/main.js"></script>`
 
 * **`htmlAttr`**  

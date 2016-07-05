@@ -38,11 +38,11 @@
         options.metaCharset +
         options.metaViewport +
         options.stylesheets +
-        options.styles +
+        options.headExtra +
       '</head>' +
       '<body ' + options.bodyAttr + '>' +
         node.innerHTML +
-        options.scripts +
+        options.bodyExtra +
       '</body>' +
       '</html>';
   }
@@ -85,11 +85,11 @@
     opts.htmlAttr = formatAttributes(opts.htmlAttr || {});
     opts.bodyAttr = formatAttributes(opts.bodyAttr || {});
     opts.sizingTimeout = opts.sizingTimeout || 500;
-    opts.styles = (opts.styles ? '<style>' + opts.styles + '</style>' : '');
     opts.stylesheets = getStylingNodes(opts.stylesSelector || 'link[rel*=stylesheet], style');
     opts.metaCharset = opts.metaCharset || metaCharsetStr;
     opts.metaViewport = opts.metaViewport || metaViewportStr;
-    opts.scripts = opts.scripts || '';
+    opts.headExtra = opts.headExtra || '';
+    opts.bodyExtra = opts.bodyExtra || '';
 
     return opts;
   }

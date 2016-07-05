@@ -111,10 +111,10 @@ describe('iframify', function () {
     };
   });
 
-  it('should allow passing extra CSS', function (done) {
+  it('should allow passing extra content in <head>', function (done) {
     var test = document.querySelector('.test-8 > .iframify');
     var iframe = iframify(test, {
-      styles: '.component--test-8 { font-style: italic }'
+      headExtra: '<style>.component--test-8 { font-style: italic }</style>'
     });
 
     iframe.onload = function () {
@@ -247,10 +247,10 @@ describe('iframify', function () {
     };
   });
 
-  it('should allow passing a custom styles selector', function (done) {
+  it('should allow passing extra content in <body>', function (done) {
     var test = document.querySelector('.test-16 > .iframify');
     var iframe = iframify(test, {
-      scripts: '<script>document.querySelector(".component").style.color = "red";</script>'
+      bodyExtra: '<script>document.querySelector(".component").style.color = "red";</script>'
     });
 
     iframe.onload = function () {
