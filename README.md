@@ -92,7 +92,7 @@ var iframe = iframify(component, {
 });
 ```
 
-Check out the [demo on CodePen](http://codepen.io/HugoGiraudel/pen/vGWpyr?editors=1000).
+Check out the [demo on CodePen](http://codepen.io/KittyGiraudel/pen/vGWpyr?editors=1000).
 
 
 ## Notes

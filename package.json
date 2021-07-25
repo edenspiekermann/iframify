@@ -11,17 +11,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/HugoGiraudel/iframify.git"
+    "url": "git+https://github.com/KittyGiraudel/iframify.git"
   },
   "keywords": [
     "iframify",
     "iframe",
     "styleguide"
   ],
-  "author": "Hugo Giraudel <h.giraudel@de.edenspiekermann.com> (http://www.edenspiekermann.com/people/hugo-giraudel)",
+  "author": "Kitty Giraudel",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/HugoGiraudel/iframify/issues"
+    "url": "https://github.com/KittyGiraudel/iframify/issues"
   },
-  "homepage": "https://github.com/HugoGiraudel/iframify#readme"
+  "homepage": "https://github.com/KittyGiraudel/iframify#readme"
 }
